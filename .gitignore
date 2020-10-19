@@ -362,3 +362,10 @@ MigrationBackup/
 FodyWeavers.xsd
 /main.class
 /Application.class
+/Window.class
+/Board.class
+/Panel.class
+/Frame.class
+/Tframe.class
+/TPanel.class
+/TBoard.class
