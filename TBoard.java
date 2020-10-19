@@ -18,7 +18,7 @@ public class TBoard {
 		return now[0].length;
 	}
 	
-	public void takeTurn(int x, int y) {//perorms each turn player 1 is x player 2 is o. player 1 always goes first
+	public void takeTurn(int x, int y) {//performs each turn player 1 is x player 2 is o. player 1 always goes first
 		if(turns % 2 == 0) {
 			now[x][y] = 'X';
 		}else {
