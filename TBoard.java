@@ -25,4 +25,14 @@ public class TBoard {
 			now[x][y] = 'Y';
 		}
 	}
+	
+	public boolean check() {
+		boolean win = false;
+		for(int i = 0;i < now.length;i++) {
+			for(int j = 0;j < now[0].length;i++) {
+				
+			}
+		}
+		return win;
+	}
 }

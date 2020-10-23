@@ -21,9 +21,9 @@ public class TPanel extends javax.swing.JPanel {
 
 		this.board = board;
 
-		ClickCell click;// Used by toggle cell to invert a cells occupancy
-		click = new ClickCell(this);
-		addMouseListener(click);// adding a mouselistener to the panel with ClickCell functionality
+		//ClickCell click;// Used by toggle cell to invert a cells occupancy
+		//click = new ClickCell(this);
+		//addMouseListener(click);// adding a mouselistener to the panel with ClickCell functionality
 
 	}
 
@@ -36,20 +36,11 @@ public class TPanel extends javax.swing.JPanel {
 
 		for (int row = 0; row < board.rows(); row++) {
 			for (int column = 0; column < board.columns(); column++) {
-
-				if (board.isAlive(row, column)) {// if the cell is alive it is green
-					g.setColor(Color.green);
-					g.fillRect(row * width, column * height, width, height);
-
-				} 
-
 				g.setColor(Color.black);//all cells receive a black border
 				g.drawRect(row * width, column * height, width, height);
 
 			}
-
 		}
-
 	}
 
 	public void toggleCellAt(int x, int y) {// inverts a cells occupancy
@@ -57,7 +48,7 @@ public class TPanel extends javax.swing.JPanel {
 		int height = getHeight() / board.columns();// height of each cell
 		int row = x / width;// finds which cell was clicked
 		int column = y / height;
-		board.toggle(row, column);// toggles that cell on the board
+		//board.toggle(row, column);// toggles that cell on the board
 		repaint();// repainting the panel
 
 	}
