@@ -26,10 +26,11 @@ public class TBoard {
 		}
 	}
 	
-	public boolean check() {
+	public boolean check() {//checks if a game winning move has been made
 		boolean win = false;
-		for(int i = 0;i < now.length;i++) {
-			for(int j = 0;j < now[0].length;i++) {
+		
+		for(int i = 0; i < now.length; i++) {
+			for(int j = 0; j < now[0].length; i++) {
 				
 			}
 		}

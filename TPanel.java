@@ -48,7 +48,7 @@ public class TPanel extends javax.swing.JPanel {
 		int height = getHeight() / board.columns();// height of each cell
 		int row = x / width;// finds which cell was clicked
 		int column = y / height;
-		//board.toggle(row, column);// toggles that cell on the board
+		board.takeTurn(row, column);// toggles that cell on the board
 		repaint();// repainting the panel
 
 	}

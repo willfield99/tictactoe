@@ -25,7 +25,6 @@ public class TFrame extends JFrame {
 		
 
 		
-		//thread.start();// starting the thread
 
 		add(boardpanel, BorderLayout.CENTER);// adding boardpanel to the center of the window
 		add(buttonpanel, BorderLayout.NORTH);// adding the buttons to the south of the window
