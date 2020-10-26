@@ -26,7 +26,7 @@ public class TBoard {
 		}
 	}
 	
-	public boolean check() {//checks if a game winning move has been made
+	public boolean checkwin() {//checks if a game winning move has been made
 		
 		
 
@@ -56,8 +56,11 @@ public class TBoard {
 		return false;
 	}
 	
-
-
+	public boolean checkCat() {//check for a cats game
+		
+		return false;
+	}
+	
 		
 		
 		
