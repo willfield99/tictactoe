@@ -1,12 +1,11 @@
 import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class TFrame extends JFrame {
-
-	
-	
-	
 	
 	/**
 	 * 
@@ -24,11 +23,14 @@ public class TFrame extends JFrame {
 		buttonpanel = new ButtonPanel();
 		
 
-		
+		JPanel undo = new JPanel();
 
 		add(boardpanel, BorderLayout.CENTER);// adding boardpanel to the center of the window
 		add(buttonpanel, BorderLayout.NORTH);// adding the buttons to the south of the window
-
+		
+		add(undo, BorderLayout.EAST);
+		
+		undo.add(new JButton("undo"));
 		setSize(width, height);// Size mutator
 		setLocation(x, y);// Location mutator
 

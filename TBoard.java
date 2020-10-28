@@ -1,6 +1,6 @@
 
 public class TBoard {
-	private String[][] now; //2d array representing the board and containing x's and o's
+	public String[][] now; //2d array representing the board and containing x's and o's
 	private int turns;//how many turns have been taken
 	
 	public TBoard() {

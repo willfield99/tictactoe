@@ -11,6 +11,8 @@
 import java.awt.Color;
 import java.io.FileNotFoundException;
 
+import javax.swing.JLabel;
+
 @SuppressWarnings("serial")
 public class TPanel extends javax.swing.JPanel {
 
@@ -21,9 +23,9 @@ public class TPanel extends javax.swing.JPanel {
 
 		this.board = board;
 
-		//ClickCell click;// Used by toggle cell to invert a cells occupancy
-		//click = new ClickCell(this);
-		//addMouseListener(click);// adding a mouselistener to the panel with ClickCell functionality
+		ClickCell click;// Used to click a square in the grid
+		click = new ClickCell(this);
+		addMouseListener(click);// adding a mouselistener to the panel with ClickCell functionality
 
 	}
 
@@ -33,9 +35,11 @@ public class TPanel extends javax.swing.JPanel {
 		setBackground(Color.white);
 		int width = getWidth() / board.rows();// width of each cell
 		int height = getHeight() / board.columns();// height of each cell
-
+		
+		JLabel[][] grid = new JLabel[board.rows()][board.columns()];
 		for (int row = 0; row < board.rows(); row++) {
 			for (int column = 0; column < board.columns(); column++) {
+				grid[row][column] = new JLabel(board.now[row][column]);
 				g.setColor(Color.black);//all cells receive a black border
 				g.drawRect(row * width, column * height, width, height);
 
@@ -43,7 +47,7 @@ public class TPanel extends javax.swing.JPanel {
 		}
 	}
 
-	public void toggleCellAt(int x, int y) {// inverts a cells occupancy
+	public void toggleCellAt(int x, int y) {// takes a turn
 		int width = getWidth() / board.rows();// width of each cell
 		int height = getHeight() / board.columns();// height of each cell
 		int row = x / width;// finds which cell was clicked

@@ -21,10 +21,13 @@ public class ButtonPanel extends JPanel {
 	public ButtonPanel() {
 	
 		JPanel buttons = new JPanel();
-
-		add(buttons, BorderLayout.NORTH);// adding buttons to BorderLayout.SOUTH
+		
+		add(buttons, BorderLayout.WEST);// adding buttons to BorderLayout.SOUTH
 		buttons.add(new JButton("file"));// adding both playaction and pauseaction to buttons
 		buttons.add(new JButton("edit"));
+		buttons.add(new JButton("about"));
+		
+		
 	}
 
 
