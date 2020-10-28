@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 public class TPanel extends javax.swing.JPanel {
 
 	private TBoard board;// board displayed by the panel
-
+	
 	public TPanel(TBoard board) throws FileNotFoundException {// constructor-initializes board and
 																				// sets up ClickCell
 
