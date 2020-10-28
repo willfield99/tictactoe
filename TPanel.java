@@ -40,6 +40,7 @@ public class TPanel extends javax.swing.JPanel {
 		for (int row = 0; row < board.rows(); row++) {
 			for (int column = 0; column < board.columns(); column++) {
 				grid[row][column] = new JLabel(board.now[row][column]);
+				
 				g.setColor(Color.black);//all cells receive a black border
 				g.drawRect(row * width, column * height, width, height);
 
