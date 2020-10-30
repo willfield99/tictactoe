@@ -1,7 +1,9 @@
 import java.io.FileNotFoundException;
 
 import javax.swing.SwingUtilities;
-
+/*
+ * Implements TFrame
+ */
 public class Application{
 	
 

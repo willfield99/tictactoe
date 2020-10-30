@@ -13,7 +13,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.sun.xml.internal.ws.api.server.Container;
-
+/*
+ * Sets up and operates the tic tac toe board
+ */
 public class TFrame extends JFrame {
 	
 	/**
