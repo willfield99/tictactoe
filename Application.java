@@ -1,19 +1,24 @@
 import java.io.FileNotFoundException;
 
+import javax.swing.SwingUtilities;
+
 public class Application{
 	
 
 public static void main(String[] args) {	
-	TFrame frame;
-	
-	
-	try {
-		frame = new TFrame(500, 100, 1019, 894);
-	} catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	SwingUtilities.invokeLater(new Runnable() {
+
+		@Override
+		public void run() {
+			
+			new TFrame();
+			
+		}
 		
+	});
+	
+	
+
 	
 }
 }	

@@ -1,4 +1,6 @@
-
+/*The TBoard class can be used to create a tic tac toe game board.
+ * 
+ */
 public class TBoard {
 	public String[][] now; //2d array representing the board and containing x's and o's
 	private int turns;//how many turns have been taken
@@ -19,10 +21,10 @@ public class TBoard {
 	}
 	
 	public void takeTurn(int x, int y) {//performs each turn player 1 is x player 2 is o. player 1 always goes first
-		if(turns % 2 == 0) {
+		if(turns % 2 == 0) {//payer one goes first so turn 0 = x
 			now[x][y] = "X";
 		}else {
-			now[x][y] = "O";
+			now[x][y] = "O"; 
 		}
 	}
 	

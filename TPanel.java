@@ -1,9 +1,9 @@
 
 /*4/16/19
  * 
- * The GameofLifePanel displays the GameofLifeBoard on a grid. 
+ * The TPanel displays the Game board on a grid. 
  * Contains a paintComponent method displaying the board 
- * and a toggleCellAt method that switches a cell when it is clicked
+ * and a toggleCellAt method used to take a turn when clicked
  * 
  * William Field
  */
@@ -11,12 +11,14 @@
 import java.awt.Color;
 import java.io.FileNotFoundException;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class TPanel extends javax.swing.JPanel {
 
 	private TBoard board;// board displayed by the panel
+	private JButton[][] spaces;//the buttons that when clicked allow a turn to be taken
 	
 	public TPanel(TBoard board) throws FileNotFoundException {// constructor-initializes board and
 																				// sets up ClickCell
@@ -26,7 +28,7 @@ public class TPanel extends javax.swing.JPanel {
 		ClickCell click;// Used to click a square in the grid
 		click = new ClickCell(this);
 		addMouseListener(click);// adding a mouselistener to the panel with ClickCell functionality
-
+		
 	}
 
 	@Override
@@ -37,6 +39,7 @@ public class TPanel extends javax.swing.JPanel {
 		int height = getHeight() / board.columns();// height of each cell
 		
 		JLabel[][] grid = new JLabel[board.rows()][board.columns()];
+		
 		for (int row = 0; row < board.rows(); row++) {
 			for (int column = 0; column < board.columns(); column++) {
 				grid[row][column] = new JLabel(board.now[row][column]);
