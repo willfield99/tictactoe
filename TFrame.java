@@ -30,9 +30,7 @@ public class TFrame extends JFrame {
 	private JButton [][] board;
 	private boolean hasWinner;
 	private JMenuBar menuBar;
-	private JMenu menu;
-	private JMenuItem quit;
-	private JMenuItem newGame;
+	
 	 /*
 	public TFrame(int x, int y, int width, int height) throws FileNotFoundException {// Creates the frame
 		super();
@@ -65,6 +63,7 @@ public class TFrame extends JFrame {
 		pane.setLayout(new GridLayout(3,3));
 		setTitle("Tic Tac Toe");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setSize(500,500);
 		setVisible(true);
 		currentPlayer = "x";
 		board = new JButton[3][3];
@@ -75,8 +74,14 @@ public class TFrame extends JFrame {
 	}
 	
 	private void inMenuBar() {//this method makes the menu bar at the top of the interface
+		JMenu file;
+		JMenuItem quit;
+		JMenuItem newGame;
+		JMenu edit;
+		JMenu about;
+		
 		menuBar = new JMenuBar();
-		menu = new JMenu("File");
+		file = new JMenu("File");
 		newGame = new JMenuItem("New Game");
 		newGame.addActionListener(new ActionListener() {
 			@Override
@@ -91,9 +96,17 @@ public class TFrame extends JFrame {
 				System.exit(0);
 			}
 		});
-		menu.add(newGame);
-		menu.add(quit);
-		menuBar.add(menu);
+		file.add(newGame);
+		file.add(quit);
+		
+		edit = new JMenu("Edit");
+		about = new JMenu("About");
+		
+		
+		
+		menuBar.add(file);
+		menuBar.add(edit);
+		menuBar.add(about);
 		setJMenuBar(menuBar);
 	}
 	private void resetBoard() {
