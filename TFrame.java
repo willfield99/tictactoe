@@ -74,7 +74,7 @@ public class TFrame extends JFrame {
 		
 	}
 	
-	private void inMenuBar() {
+	private void inMenuBar() {//this method makes the menu bar at the top of the interface
 		menuBar = new JMenuBar();
 		menu = new JMenu("File");
 		newGame = new JMenuItem("New Game");
