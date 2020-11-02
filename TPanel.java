@@ -1,10 +1,7 @@
 
-/*4/16/19
+/*
  * 
- * The TPanel displays the Game board on a grid. 
- * Contains a paintComponent method displaying the board 
- * and a toggleCellAt method used to take a turn when clicked
- * 
+ * TThis class is currently unused
  * William Field
  */
 

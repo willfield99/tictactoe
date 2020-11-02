@@ -1,9 +1,5 @@
 
-/*4/16/2019
- * 
- * The ButtonPanel class creates the panel that contains the play and pause buttons for the board GUI 
- * 
- * William Field
+/*this class is currently unused
  */
 import java.awt.BorderLayout;
 

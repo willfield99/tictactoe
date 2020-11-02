@@ -1,7 +1,5 @@
 
-/*4/16/19
- * 
- * ClickCell Handles the mouse event for toggling a cell
+/*this class is currently unused
  * 
  */
 import java.awt.event.MouseEvent;

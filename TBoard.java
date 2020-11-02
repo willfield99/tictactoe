@@ -1,4 +1,4 @@
-/*The TBoard class can be used to create a tic tac toe game board.
+/*This class is currently unused
  * 
  */
 public class TBoard {

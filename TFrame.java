@@ -19,45 +19,15 @@ import com.sun.xml.internal.ws.api.server.Container;
  */
 public class TFrame extends JFrame {
 	
-	/**
-	 * 
-	 
-	private static final long serialVersionUID = 1L;
-	private TPanel boardpanel;// the panel on which the board is displayed
-	private ButtonPanel buttonpanel;
-	**/
+	
 	private java.awt.Container pane;
 	private String currentPlayer;
 	private JButton [][] board;
 	private boolean hasWinner;
 	private JMenuBar menuBar;
 	
-	 /*
-	public TFrame(int x, int y, int width, int height) throws FileNotFoundException {// Creates the frame
-		super();
-		TBoard board;// board used by the panel
-		
-		board = new TBoard();
-		boardpanel = new TPanel(board);
-		buttonpanel = new ButtonPanel();
-		
-
-		JPanel undo = new JPanel();
-
-		add(boardpanel, BorderLayout.CENTER);// adding boardpanel to the center of the window
-		add(buttonpanel, BorderLayout.NORTH);// adding the buttons to the south of the window
-		
-		add(undo, BorderLayout.EAST);
-		
-		undo.add(new JButton("undo"));
-		setSize(width, height);// Size mutator
-		setLocation(x, y);// Location mutator
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
-
-	}
-	*/
+	
+	
 	public TFrame() {//constructs the window
 		super();
 		pane = getContentPane();
@@ -130,25 +100,25 @@ public class TFrame extends JFrame {
 				btn.addActionListener(new ActionListener() {
 					
 					@Override
-					public void actionPerformed(ActionEvent e) {
+					public void actionPerformed(ActionEvent e) {//listens for a click on one of the spaces. puts the appropriate game piece there
 						if(((JButton)e.getSource()).getText().contentEquals("") &&
-						hasWinner == false) {
-							btn.setText(currentPlayer);
-							if(currentPlayer.contentEquals("x")) {
+						hasWinner == false) {//if the space is empty and there hasnt been a winner yet
+							btn.setText(currentPlayer);//put the current players game piece there
+							if(currentPlayer.contentEquals("x")) {//x is red o is blue
 								btn.setForeground(Color.RED);
 							}else {
 								btn.setForeground(Color.BLUE);
 							}
-							hasWinner(); 
-							togglePlayer();
+							hasWinner(); //check if it was a game winning move
+							togglePlayer();//its now the other players turn
 						}
 					}
 				});
-				pane.add(btn);
+				pane.add(btn);//add the new button to the pane
 			}
 		}
 	}
-	private void togglePlayer() {
+	private void togglePlayer() {//switches for each turn
 		if(currentPlayer.contentEquals("x"))
 			currentPlayer = "o";
 		else
@@ -156,35 +126,35 @@ public class TFrame extends JFrame {
 	}
 	private void hasWinner() {//checks if the game has been won
 	        if(board[0][0].getText().equals(currentPlayer) && board[1][0].getText().equals(currentPlayer) && board[2][0].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "Player" + currentPlayer + "has won");
+	            JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " has won");
 	            hasWinner = true;
 	        }
 	        else if(board[0][1].getText().equals(currentPlayer) && board[1][1].getText().equals(currentPlayer) && board[2][1].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "Player" + currentPlayer + "has won");
+	            JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " has won");
 	            hasWinner = true;
 	        }
 	        else if(board[0][2].getText().equals(currentPlayer) && board[1][2].getText().equals(currentPlayer) && board[2][2].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "Player" + currentPlayer + "has won");
+	            JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " has won");
 	            hasWinner = true;
 	        }
 	        else if(board[0][0].getText().equals(currentPlayer) && board[1][1].getText().equals(currentPlayer) && board[2][2].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "Player" + currentPlayer + "has won");
+	            JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " has won");
 	            hasWinner = true;
 	        }
 	        else if(board[0][2].getText().equals(currentPlayer) && board[1][1].getText().equals(currentPlayer) && board[2][0].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "Player" + currentPlayer + "has won");
+	            JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " has won");
 	            hasWinner = true;
 	        }
 	        else if(board[0][0].getText().equals(currentPlayer) && board[0][1].getText().equals(currentPlayer) && board[0][2].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "Player" + currentPlayer + "has won");
+	            JOptionPane.showMessageDialog(null, "Player" + currentPlayer + " has won");
 	            hasWinner = true;
 	        }
 	        else if(board[1][0].getText().equals(currentPlayer) && board[1][1].getText().equals(currentPlayer) && board[1][2].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "Player" + currentPlayer + "has won");
+	            JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " has won");
 	            hasWinner = true;
 	        }
 	        else if(board[2][0].getText().equals(currentPlayer) && board[2][1].getText().equals(currentPlayer) && board[2][2].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "Player" + currentPlayer + "has won");
+	            JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " has won");
 	            hasWinner = true;
 	        }
 	}
