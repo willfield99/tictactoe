@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -57,7 +58,7 @@ public class TFrame extends JFrame {
 
 	}
 	*/
-	public TFrame() {
+	public TFrame() {//constructs the window
 		super();
 		pane = getContentPane();
 		pane.setLayout(new GridLayout(3,3));
@@ -109,7 +110,7 @@ public class TFrame extends JFrame {
 		menuBar.add(about);
 		setJMenuBar(menuBar);
 	}
-	private void resetBoard() {
+	private void resetBoard() {//sets board spaces to empty
 		currentPlayer = "x";
 		hasWinner = false;
 		for(int i = 0; i < 3; i++) {
@@ -119,11 +120,12 @@ public class TFrame extends JFrame {
 			}
 		}
 	}
-	private void initializeBoard() {
+	private void initializeBoard() {//creates the board each turn
 		for(int i = 0; i <3; i++) {
 			for(int j = 0; j <3; j++) {
 				JButton btn = new JButton();
-				//btn.setFont(new Font(Font.SANS_SERIF, FONT.BOLD, 100));
+				
+				btn.setForeground(Color.BLUE);
 				board[i][j] = btn;
 				btn.addActionListener(new ActionListener() {
 					
@@ -132,6 +134,11 @@ public class TFrame extends JFrame {
 						if(((JButton)e.getSource()).getText().contentEquals("") &&
 						hasWinner == false) {
 							btn.setText(currentPlayer);
+							if(currentPlayer.contentEquals("x")) {
+								btn.setForeground(Color.RED);
+							}else {
+								btn.setForeground(Color.BLUE);
+							}
 							hasWinner(); 
 							togglePlayer();
 						}
@@ -147,7 +154,7 @@ public class TFrame extends JFrame {
 		else
 			currentPlayer = "x";
 	}
-	private void hasWinner() {
+	private void hasWinner() {//checks if the game has been won
 	        if(board[0][0].getText().equals(currentPlayer) && board[1][0].getText().equals(currentPlayer) && board[2][0].getText().equals(currentPlayer)) {
 	            JOptionPane.showMessageDialog(null, "Player" + currentPlayer + "has won");
 	            hasWinner = true;
