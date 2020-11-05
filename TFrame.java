@@ -50,6 +50,7 @@ public class TFrame extends JFrame {
 		JMenuItem newGame;
 		JMenu edit;
 		JMenu about;
+		JMenuItem undo;
 		
 		menuBar = new JMenuBar();
 		file = new JMenu("File");
@@ -71,6 +72,14 @@ public class TFrame extends JFrame {
 		file.add(quit);
 		
 		edit = new JMenu("Edit");
+		undo = new JMenuItem("Undo");
+		newGame.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				resetBoard();
+			}
+		});
+		
 		about = new JMenu("About");
 		
 		
