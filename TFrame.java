@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
+//import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -75,7 +75,7 @@ public class TFrame extends JFrame {
 		
 		edit = new JMenu("Edit");
 		undo = new JMenuItem("Undo");
-		newGame.addActionListener(new ActionListener() {
+		undo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				undoTurn();
@@ -108,7 +108,7 @@ public class TFrame extends JFrame {
 		//togglePlayer();
 	}
 	private void initializeBoard() {//creates the board each turn
-		prevboard = board;
+		
 		for(int i = 0; i <3; i++) {
 			for(int j = 0; j <3; j++) {
 				JButton btn = new JButton();
@@ -129,6 +129,7 @@ public class TFrame extends JFrame {
 							}
 							hasWinner(); //check if it was a game winning move
 							togglePlayer();//its now the other players turn
+							prevboard = board;
 						}
 					}
 				});
