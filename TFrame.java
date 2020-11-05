@@ -23,6 +23,7 @@ public class TFrame extends JFrame {
 	private java.awt.Container pane;
 	private String currentPlayer;
 	private JButton [][] board;
+	private JButton [][] prevboard;
 	private boolean hasWinner;
 	private JMenuBar menuBar;
 	
@@ -38,6 +39,7 @@ public class TFrame extends JFrame {
 		setVisible(true);
 		currentPlayer = "x";
 		board = new JButton[3][3];
+		prevboard = board;
 		hasWinner = false;
 		initializeBoard();
 		inMenuBar();
@@ -76,10 +78,10 @@ public class TFrame extends JFrame {
 		newGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				resetBoard();
+				undoTurn();
 			}
 		});
-		
+		edit.add(undo);
 		about = new JMenu("About");
 		
 		
@@ -99,7 +101,14 @@ public class TFrame extends JFrame {
 			}
 		}
 	}
+	
+	private void undoTurn() {
+		board = prevboard;
+		initializeBoard();
+		//togglePlayer();
+	}
 	private void initializeBoard() {//creates the board each turn
+		prevboard = board;
 		for(int i = 0; i <3; i++) {
 			for(int j = 0; j <3; j++) {
 				JButton btn = new JButton();
