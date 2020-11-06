@@ -150,6 +150,30 @@ public class TFrame extends JFrame {
 		else
 			currentPlayer = "x";
 	}
+	/*
+	I created this method that will check if all the spaces are filled. If called at the end of the hasWinner method, 
+	it effectively checks for a tie because if all the spaces are filled and no one has won yet, it must be a tie.
+*/
+	private boolean checkTie() {
+		int tally = 0;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if(board[i][j].getText().isEmpty()) {
+					break;
+				} 
+				else {
+					tally = tally + 1;
+				}
+			}	 
+	        }	
+		if (tally == 9) {
+			return true;	
+		} else {	
+			return false;
+		}
+	}
+	        
+
 	private void hasWinner() {//checks if the game has been won
 	        if(board[0][0].getText().equals(currentPlayer) && board[1][0].getText().equals(currentPlayer) && board[2][0].getText().equals(currentPlayer)) {
 	            JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " has won");
@@ -183,6 +207,11 @@ public class TFrame extends JFrame {
 	            JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " has won");
 	            hasWinner = true;
 	        }
+	        else if (checkTie() == true) {        	
+	        	JOptionPane.showMessageDialog(null, "The game has ended in a tie");
+	        	hasWinner = false;
+	        }
+
 	}
 	
 }
