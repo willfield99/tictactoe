@@ -39,7 +39,7 @@ public class TFrame extends JFrame {
 		setVisible(true);
 		currentPlayer = "x";
 		board = new JButton[3][3];
-		prevboard = board;
+		prevboard = new JButton[3][3];
 		hasWinner = false;
 		initializeBoard();
 		inMenuBar();
@@ -56,7 +56,7 @@ public class TFrame extends JFrame {
 		
 		menuBar = new JMenuBar();
 		file = new JMenu("File");
-		newGame = new JMenuItem("New Game");
+		newGame = new JMenuItem("Reset Game");
 		newGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -103,9 +103,14 @@ public class TFrame extends JFrame {
 	}
 	
 	private void undoTurn() {
-		board = prevboard;
-		initializeBoard();
-		//togglePlayer();
+		for(int i = 0; i <3; i++) {
+			for(int j = 0; j <3; j++) {
+				JButton btn = new JButton();
+				//btn.setForeground(Color.BLUE);
+				btn.setText(prevboard[i][j].getText());
+				pane.add(btn);//add the new button to the pane
+			}
+		}
 	}
 	private void initializeBoard() {//creates the board each turn
 		
@@ -114,6 +119,7 @@ public class TFrame extends JFrame {
 				JButton btn = new JButton();
 				
 				btn.setForeground(Color.BLUE);
+				
 				board[i][j] = btn;
 				btn.addActionListener(new ActionListener() {
 					
@@ -133,6 +139,7 @@ public class TFrame extends JFrame {
 						}
 					}
 				});
+				prevboard[i][j] = btn;
 				pane.add(btn);//add the new button to the pane
 			}
 		}
