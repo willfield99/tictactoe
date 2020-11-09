@@ -1,26 +1,36 @@
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import com.sun.xml.internal.ws.api.server.Container;
+
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 /*
  * Sets up and operates the tic tac toe board
  */
 public class TFrame extends JFrame {
 	
-	
+	//BorderPane border;\
+	private JPanel names;
 	private java.awt.Container pane;
+	
 	private String currentPlayer;
 	private JButton [][] board;
 	private JButton [][] prevboard;
@@ -31,9 +41,11 @@ public class TFrame extends JFrame {
 	
 	public TFrame() {//constructs the window
 		super();
+		names = new JPanel();
 		pane = getContentPane();
 		pane.setLayout(new GridLayout(3,3));
 		setTitle("Tic Tac Toe");
+		
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(500,500);
 		setVisible(true);
@@ -41,9 +53,27 @@ public class TFrame extends JFrame {
 		board = new JButton[3][3];
 		prevboard = new JButton[3][3];
 		hasWinner = false;
+		inPlayers();
 		initializeBoard();
 		inMenuBar();
 		
+		
+		
+	}
+	
+	private void inPlayers() {//makes the player 1 and player 2 text boxes
+		HBox names = new HBox();
+		Label player1 = new Label("player 1");
+		Label player2 = new Label("player 2");
+		TextField p1 = new TextField(24);
+		Button enter1 = new Button("Enter");
+		enter1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				player1.setText(p1.getText());
+				p1.setText("  ");
+			}
+		});
 	}
 	
 	private void inMenuBar() {//this method makes the menu bar at the top of the interface
@@ -143,6 +173,7 @@ public class TFrame extends JFrame {
 				pane.add(btn);//add the new button to the pane
 			}
 		}
+		
 	}
 	private void togglePlayer() {//switches for each turn
 		if(currentPlayer.contentEquals("x"))
