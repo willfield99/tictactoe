@@ -3,6 +3,7 @@ import java.awt.Button;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Label;
+import java.awt.Point;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,10 +39,12 @@ public class TFrame extends JFrame {
 	private JButton [][] prevboard;
 	private boolean hasWinner;
 	private JMenuBar menuBar;
+	
 	private String playerName1;
 	private String playerName2;
 	private int score1;
 	private int score2;
+	private Point p = new Point();
 	
 	
 	public TFrame() {//constructs the window
@@ -101,7 +104,6 @@ public class TFrame extends JFrame {
 		pane.add(scoreHolder);
 		pane.add(name2Holder);
 		
-		
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(500,500);
 		setVisible(true);
@@ -113,11 +115,11 @@ public class TFrame extends JFrame {
 		initializeBoard();
 		inMenuBar();
 		
-
 		JOptionPane.showMessageDialog(null, "Enter Player 1 Name and press Enter");
 		
 	}	
 
+	
 	
 	private void inMenuBar() {//this method makes the menu bar at the top of the interface
 		JMenu file;
@@ -176,14 +178,29 @@ public class TFrame extends JFrame {
 	}
 	
 	private void undoTurn() {
+
+
 		for(int i = 0; i <3; i++) {
-			for(int j = 0; j <3; j++) {
-				JButton btn = new JButton();
-				//btn.setForeground(Color.BLUE);
-				btn.setText(prevboard[i][j].getText());
-				pane.add(btn);//add the new button to the pane
+
+		     for(int j = 0; j <3; j++) {
+
+			if (board[i][j].getBounds().contains(p)) {
+
+				board[i][j].setText("");
+
+				togglePlayer();
+
 			}
-		}
+
+							
+
+			else {
+				
+			}
+			}		
+		     
+		}	
+		
 	}
 	private void initializeBoard() {//creates the board each turn
 		
@@ -200,6 +217,8 @@ public class TFrame extends JFrame {
 					public void actionPerformed(ActionEvent e) {//listens for a click on one of the spaces. puts the appropriate game piece there
 						if(((JButton)e.getSource()).getText().contentEquals("") &&
 						hasWinner == false) {//if the space is empty and there hasnt been a winner yet
+							
+							p = pane.getMousePosition();
 							btn.setText(currentPlayer);//put the current players game piece there
 							if(currentPlayer.contentEquals("x")) {//x is red o is blue
 								btn.setForeground(Color.RED);
@@ -212,7 +231,7 @@ public class TFrame extends JFrame {
 						}
 					}
 				});
-				prevboard[i][j] = btn;
+				
 				pane.add(btn);//add the new button to the pane
 			}
 		}
