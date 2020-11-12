@@ -20,6 +20,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.DefaultHighlighter;
 
 import com.sun.xml.internal.ws.api.server.Container;
 
@@ -100,6 +101,8 @@ public class TFrame extends JFrame {
 		name2Holder.setLayout(new BorderLayout());
 		name2Holder.add(name2,BorderLayout.CENTER);
 		
+		
+		
 		pane.add(name1Holder);
 		pane.add(scoreHolder);
 		pane.add(name2Holder);
@@ -114,6 +117,11 @@ public class TFrame extends JFrame {
 		
 		initializeBoard();
 		inMenuBar();
+		
+		if(currentPlayer.equals("x")) {
+			//name1.getHighlighter()addHighlight(
+		           // new DefaultHighlighter.DefaultHighlightPainter(Color.yellow));;
+		}
 		
 		JOptionPane.showMessageDialog(null, "Enter Player 1 Name and press Enter");
 		
