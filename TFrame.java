@@ -22,13 +22,18 @@ import javax.swing.JTextField;
  */
 public class TFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	// BorderPane border;\
-	private JPanel names;
+	
 	private java.awt.Container pane;
 
 	private String currentPlayer;
 	private JButton[][] board;
-	private JButton[][] prevboard;
+	
 	private boolean hasWinner;
 	private JMenuBar menuBar;
 
@@ -42,7 +47,7 @@ public class TFrame extends JFrame {
 
 	public TFrame() {// constructs the window
 		super();
-		names = new JPanel();
+		
 		pane = getContentPane();
 		pane.setLayout(new GridLayout(4, 3));
 		setTitle("Tic Tac Toe");
@@ -101,7 +106,6 @@ public class TFrame extends JFrame {
 		setVisible(true);
 		currentPlayer = "x";
 		board = new JButton[3][3];
-		prevboard = new JButton[3][3];
 		hasWinner = false;
 
 		initializeBoard();
@@ -221,7 +225,6 @@ public class TFrame extends JFrame {
 							}
 							hasWinner(); // check if it was a game winning move
 							togglePlayer();// its now the other players turn
-							prevboard = board;
 						}
 					}
 				});
