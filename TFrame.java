@@ -43,6 +43,8 @@ public class TFrame extends JFrame {
 	
 	private String playerName1;
 	private String playerName2;
+	private JTextField name1;
+	private JTextField name2;
 	private int score1;
 	private int score2;
 	private Point p = new Point();
@@ -55,8 +57,8 @@ public class TFrame extends JFrame {
 		pane.setLayout(new GridLayout(4,3));
 		setTitle("Tic Tac Toe");
 		
-		JTextField name1 = new JTextField("Player 1");
-		JTextField name2 = new JTextField("Player 2");
+		name1 = new JTextField("Player 1");
+		name2 = new JTextField("Player 2");
 		name1.setHorizontalAlignment(name1.CENTER);
 		name1.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
@@ -118,10 +120,8 @@ public class TFrame extends JFrame {
 		initializeBoard();
 		inMenuBar();
 		
-		if(currentPlayer.equals("x")) {
-			//name1.getHighlighter()addHighlight(
-		           // new DefaultHighlighter.DefaultHighlightPainter(Color.yellow));;
-		}
+		
+		
 		
 		JOptionPane.showMessageDialog(null, "Enter Player 1 Name and press Enter");
 		
@@ -246,10 +246,16 @@ public class TFrame extends JFrame {
 		
 	}
 	private void togglePlayer() {//switches for each turn
-		if(currentPlayer.contentEquals("x"))
+		if(currentPlayer.contentEquals("x")) {//switches the game piece and highlights whoevers turn it is
 			currentPlayer = "o";
-		else
+			name1.setBackground(Color.white);
+			name2.setBackground(Color.yellow);
+	}
+		else {
 			currentPlayer = "x";
+			name1.setBackground(Color.yellow);
+			name2.setBackground(Color.white);
+		}
 	}
 	/*
 	I created this method that will check if all the spaces are filled. If called at the end of the hasWinner method, 
