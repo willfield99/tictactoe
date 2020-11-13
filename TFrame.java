@@ -1,10 +1,7 @@
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.Label;
 import java.awt.Point;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //import java.io.FileNotFoundException;
@@ -13,34 +10,28 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.text.DefaultHighlighter;
 
-import com.sun.xml.internal.ws.api.server.Container;
-
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 /*
  * Sets up and operates the tic tac toe board
  */
 public class TFrame extends JFrame {
-	
-	//BorderPane border;\
+
+	// BorderPane border;\
 	private JPanel names;
 	private java.awt.Container pane;
-	
+
 	private String currentPlayer;
-	private JButton [][] board;
-	private JButton [][] prevboard;
+	private JButton[][] board;
+	private JButton[][] prevboard;
 	private boolean hasWinner;
 	private JMenuBar menuBar;
-	
+
 	private String playerName1;
 	private String playerName2;
 	private JTextField name1;
@@ -48,34 +39,32 @@ public class TFrame extends JFrame {
 	private int score1;
 	private int score2;
 	private Point p = new Point();
-	
-	
-	public TFrame() {//constructs the window
+
+	public TFrame() {// constructs the window
 		super();
 		names = new JPanel();
 		pane = getContentPane();
-		pane.setLayout(new GridLayout(4,3));
+		pane.setLayout(new GridLayout(4, 3));
 		setTitle("Tic Tac Toe");
-		
+
 		name1 = new JTextField("Player 1");
 		name2 = new JTextField("Player 2");
 		name1.setHorizontalAlignment(name1.CENTER);
 		name1.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-				name1.setEditable(false);
-				playerName1 = name1.getText();
-				JOptionPane.showMessageDialog(null, "Enter Player 2 Name and press Enter");
-				name2.requestFocus();
+					name1.setEditable(false);
+					playerName1 = name1.getText();
+					JOptionPane.showMessageDialog(null, "Enter Player 2 Name and press Enter");
+					name2.requestFocus();
 				}
 			}
-			
-		}
-		);
+
+		});
 		JPanel name1Holder = new JPanel();
 		name1Holder.setLayout(new BorderLayout());
-		name1Holder.add(name1,BorderLayout.CENTER);
-		
+		name1Holder.add(name1, BorderLayout.CENTER);
+
 		JTextField scorelabel = new JTextField("Score:");
 		scorelabel.setHorizontalAlignment(scorelabel.CENTER);
 		scorelabel.setEditable(false);
@@ -84,59 +73,52 @@ public class TFrame extends JFrame {
 		scorenumbers.setEditable(false);
 		JPanel scoreHolder = new JPanel();
 		scoreHolder.setLayout(new BorderLayout());
-		scoreHolder.add(scorelabel,BorderLayout.NORTH);
-		scoreHolder.add(scorenumbers,BorderLayout.CENTER);
-		
+		scoreHolder.add(scorelabel, BorderLayout.NORTH);
+		scoreHolder.add(scorenumbers, BorderLayout.CENTER);
+
 		name2.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-				name2.setEditable(false);
-				playerName2 = name2.getText();
-				JOptionPane.showMessageDialog(null,"\"" +playerName1 + "\" may now click on the board to make their first move");
+					name2.setEditable(false);
+					playerName2 = name2.getText();
+					JOptionPane.showMessageDialog(null,
+							"\"" + playerName1 + "\" may now click on the board to make their first move");
 				}
 			}
-			
-		}
-		);
+
+		});
 		name2.setHorizontalAlignment(name2.CENTER);
 		JPanel name2Holder = new JPanel();
 		name2Holder.setLayout(new BorderLayout());
-		name2Holder.add(name2,BorderLayout.CENTER);
-		
-		
-		
+		name2Holder.add(name2, BorderLayout.CENTER);
+
 		pane.add(name1Holder);
 		pane.add(scoreHolder);
 		pane.add(name2Holder);
-		
+
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setSize(500,500);
+		setSize(500, 500);
 		setVisible(true);
 		currentPlayer = "x";
 		board = new JButton[3][3];
 		prevboard = new JButton[3][3];
 		hasWinner = false;
-		
+
 		initializeBoard();
 		inMenuBar();
-		
-		
-		
-		
-		JOptionPane.showMessageDialog(null, "Enter Player 1 Name and press Enter");
-		
-	}	
 
-	
-	
-	private void inMenuBar() {//this method makes the menu bar at the top of the interface
+		JOptionPane.showMessageDialog(null, "Enter Player 1 Name and press Enter");
+
+	}
+
+	private void inMenuBar() {// this method makes the menu bar at the top of the interface
 		JMenu file;
 		JMenuItem quit;
 		JMenuItem newGame;
 		JMenu edit;
 		JMenu about;
 		JMenuItem undo;
-		
+
 		menuBar = new JMenuBar();
 		file = new JMenu("File");
 		newGame = new JMenuItem("Reset Game");
@@ -155,7 +137,7 @@ public class TFrame extends JFrame {
 		});
 		file.add(newGame);
 		file.add(quit);
-		
+
 		edit = new JMenu("Edit");
 		undo = new JMenuItem("Undo");
 		undo.addActionListener(new ActionListener() {
@@ -166,167 +148,170 @@ public class TFrame extends JFrame {
 		});
 		edit.add(undo);
 		about = new JMenu("About");
-		
-		
-		
+
 		menuBar.add(file);
 		menuBar.add(edit);
 		menuBar.add(about);
 		setJMenuBar(menuBar);
 	}
-	private void resetBoard() {//sets board spaces to empty
+
+	private void resetBoard() {// sets board spaces to empty
 		currentPlayer = "x";
 		hasWinner = false;
-		for(int i = 0; i < 3; i++) {
-			for(int j = 0;j < 3; j++) {
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
 				board[i][j].setText("");
-				
+
 			}
 		}
 	}
-	
-	private void undoTurn() {
 
+	private void undoTurn() {// used to undo a turn on the board
 
-		for(int i = 0; i <3; i++) {
+		for (int i = 0; i < 3; i++) {
 
-		     for(int j = 0; j <3; j++) {
+			for (int j = 0; j < 3; j++) {
 
-			if (board[i][j].getBounds().contains(p)) {
+				if (board[i][j].getBounds().contains(p)) {
 
-				board[i][j].setText("");
+					board[i][j].setText("");
 
-				togglePlayer();
+					togglePlayer();
 
+				}
+
+				else {
+
+				}
 			}
 
-							
+		}
 
-			else {
-				
-			}
-			}		
-		     
-		}	
-		
 	}
-	private void initializeBoard() {//creates the board each turn
-		
-		for(int i = 0; i <3; i++) {
-			for(int j = 0; j <3; j++) {
+
+	private void initializeBoard() {// creates the board each turn
+
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
 				JButton btn = new JButton();
-				
+
 				btn.setForeground(Color.BLUE);
-				
+
 				board[i][j] = btn;
 				btn.addActionListener(new ActionListener() {
-					
+
 					@Override
-					public void actionPerformed(ActionEvent e) {//listens for a click on one of the spaces. puts the appropriate game piece there
-						if(((JButton)e.getSource()).getText().contentEquals("") &&
-						hasWinner == false) {//if the space is empty and there hasnt been a winner yet
-							
+					public void actionPerformed(ActionEvent e) {// listens for a click on one of the spaces. puts the
+																// appropriate game piece there
+						if (((JButton) e.getSource()).getText().contentEquals("") && hasWinner == false) {// if the
+																											// space is
+																											// empty and
+																											// there
+																											// hasnt
+																											// been a
+																											// winner
+																											// yet
+
 							p = pane.getMousePosition();
-							btn.setText(currentPlayer);//put the current players game piece there
-							if(currentPlayer.contentEquals("x")) {//x is red o is blue
+							btn.setText(currentPlayer);// put the current players game piece there
+							if (currentPlayer.contentEquals("x")) {// x is red o is blue
 								btn.setForeground(Color.RED);
-							}else {
+							} else {
 								btn.setForeground(Color.BLUE);
 							}
-							hasWinner(); //check if it was a game winning move
-							togglePlayer();//its now the other players turn
+							hasWinner(); // check if it was a game winning move
+							togglePlayer();// its now the other players turn
 							prevboard = board;
 						}
 					}
 				});
-				
-				pane.add(btn);//add the new button to the pane
+
+				pane.add(btn);// add the new button to the pane
 			}
 		}
-		
+
 	}
-	private void togglePlayer() {//switches for each turn
-		if(currentPlayer.contentEquals("x")) {//switches the game piece and highlights whoevers turn it is
+
+	private void togglePlayer() {// switches for each turn
+		if (currentPlayer.contentEquals("x")) {// switches the game piece and highlights whoevers turn it is
 			currentPlayer = "o";
 			name1.setBackground(Color.white);
 			name2.setBackground(Color.yellow);
-	}
-		else {
+		} else {
 			currentPlayer = "x";
 			name1.setBackground(Color.yellow);
 			name2.setBackground(Color.white);
 		}
 	}
+
 	/*
-	I created this method that will check if all the spaces are filled. If called at the end of the hasWinner method, 
-	it effectively checks for a tie because if all the spaces are filled and no one has won yet, it must be a tie.
-*/
+	 * I created this method that will check if all the spaces are filled. If called
+	 * at the end of the hasWinner method, it effectively checks for a tie because
+	 * if all the spaces are filled and no one has won yet, it must be a tie.
+	 */
 	private boolean checkTie() {
 		int tally = 0;
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				if(board[i][j].getText().isEmpty()) {
+				if (board[i][j].getText().isEmpty()) {
 					break;
-				} 
-				else {
+				} else {
 					tally = tally + 1;
 				}
-			}	 
-	        }	
+			}
+		}
 		if (tally == 9) {
-			return true;	
-		} else {	
+			return true;
+		} else {
 			return false;
 		}
 	}
-	        
 
-	private void hasWinner() {//checks if the game has been won
+	private void hasWinner() {// checks if the game has been won or a tie has occured
 		String currentPlayerName;
-		if (currentPlayer.equals("x")){
+		if (currentPlayer.equals("x")) {
 			currentPlayerName = playerName1;
 		} else {
 			currentPlayerName = playerName2;
 		}
-		
-		
-	        if(board[0][0].getText().equals(currentPlayer) && board[1][0].getText().equals(currentPlayer) && board[2][0].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
-	            hasWinner = true;
-	        }
-	        else if(board[0][1].getText().equals(currentPlayer) && board[1][1].getText().equals(currentPlayer) && board[2][1].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
-	            hasWinner = true;
-	        }
-	        else if(board[0][2].getText().equals(currentPlayer) && board[1][2].getText().equals(currentPlayer) && board[2][2].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
-	            hasWinner = true;
-	        }
-	        else if(board[0][0].getText().equals(currentPlayer) && board[1][1].getText().equals(currentPlayer) && board[2][2].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
-	            hasWinner = true;
-	        }
-	        else if(board[0][2].getText().equals(currentPlayer) && board[1][1].getText().equals(currentPlayer) && board[2][0].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
-	            hasWinner = true;
-	        }
-	        else if(board[0][0].getText().equals(currentPlayer) && board[0][1].getText().equals(currentPlayer) && board[0][2].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
-	            hasWinner = true;
-	        }
-	        else if(board[1][0].getText().equals(currentPlayer) && board[1][1].getText().equals(currentPlayer) && board[1][2].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
-	            hasWinner = true;
-	        }
-	        else if(board[2][0].getText().equals(currentPlayer) && board[2][1].getText().equals(currentPlayer) && board[2][2].getText().equals(currentPlayer)) {
-	            JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
-	            hasWinner = true;
-	        }
-	        else if (checkTie() == true) {        	
-	        	JOptionPane.showMessageDialog(null, "The game has ended in a tie");
-	        	hasWinner = false;
-	        }
+
+		if (board[0][0].getText().equals(currentPlayer) && board[1][0].getText().equals(currentPlayer)
+				&& board[2][0].getText().equals(currentPlayer)) {
+			JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
+			hasWinner = true;
+		} else if (board[0][1].getText().equals(currentPlayer) && board[1][1].getText().equals(currentPlayer)
+				&& board[2][1].getText().equals(currentPlayer)) {
+			JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
+			hasWinner = true;
+		} else if (board[0][2].getText().equals(currentPlayer) && board[1][2].getText().equals(currentPlayer)
+				&& board[2][2].getText().equals(currentPlayer)) {
+			JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
+			hasWinner = true;
+		} else if (board[0][0].getText().equals(currentPlayer) && board[1][1].getText().equals(currentPlayer)
+				&& board[2][2].getText().equals(currentPlayer)) {
+			JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
+			hasWinner = true;
+		} else if (board[0][2].getText().equals(currentPlayer) && board[1][1].getText().equals(currentPlayer)
+				&& board[2][0].getText().equals(currentPlayer)) {
+			JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
+			hasWinner = true;
+		} else if (board[0][0].getText().equals(currentPlayer) && board[0][1].getText().equals(currentPlayer)
+				&& board[0][2].getText().equals(currentPlayer)) {
+			JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
+			hasWinner = true;
+		} else if (board[1][0].getText().equals(currentPlayer) && board[1][1].getText().equals(currentPlayer)
+				&& board[1][2].getText().equals(currentPlayer)) {
+			JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
+			hasWinner = true;
+		} else if (board[2][0].getText().equals(currentPlayer) && board[2][1].getText().equals(currentPlayer)
+				&& board[2][2].getText().equals(currentPlayer)) {
+			JOptionPane.showMessageDialog(null, "\"" + currentPlayerName + "\" has won");
+			hasWinner = true;
+		} else if (checkTie() == true) {
+			JOptionPane.showMessageDialog(null, "The game has ended in a tie");
+			hasWinner = false;
+		}
 
 	}
-	
+
 }
