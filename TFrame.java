@@ -129,7 +129,7 @@ public class TFrame extends JFrame {
 		newGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				resetBoard();
+				resetGame();
 			}
 		});
 		quit = new JMenuItem("Quit");
@@ -159,7 +159,20 @@ public class TFrame extends JFrame {
 		setJMenuBar(menuBar);
 	}
 
-	private void resetBoard() {// sets board spaces to empty
+	private void resetGame() {// sets board spaces to empty
+		currentPlayer = "x";
+		hasWinner = false;
+		score1 = 0;
+		score2 = 0;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				board[i][j].setText("");
+
+			}
+		}
+	}
+	
+	private void newGame() {// sets board spaces to empty
 		currentPlayer = "x";
 		hasWinner = false;
 		for (int i = 0; i < 3; i++) {
@@ -224,6 +237,7 @@ public class TFrame extends JFrame {
 								btn.setForeground(Color.BLUE);
 							}
 							hasWinner(); // check if it was a game winning move
+							winScreen(hasWinner);
 							togglePlayer();// its now the other players turn
 						}
 					}
@@ -354,7 +368,21 @@ public class TFrame extends JFrame {
 			JOptionPane.showMessageDialog(null, "The game has ended in a tie");
 			hasWinner = false;
 		}
-
+		
+	}
+	private void winScreen(boolean win) {
+		String winMessage = "Congrats to " + currentPlayer + " on winning the game!";
+		String[] options = {"New Game", "Reset Game", "Quit Game"};
+		if(win) {
+			int x = JOptionPane.showOptionDialog(null, winMessage, "Win Screen", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+			if(x == 0) {
+				newGame();
+			}else if(x == 1) {
+				resetGame();
+			}else if(x == 2) {
+				System.exit(0);
+			}
+		}
 	}
 
 }
