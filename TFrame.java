@@ -15,6 +15,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /*
@@ -33,12 +34,14 @@ public class TFrame extends JFrame {
 
 	private String currentPlayer;
 	private JButton[][] board;
+	private JTextField scorenumbers;
+	private JFrame aboutScreen;
 	
 	private boolean hasWinner;
 	private JMenuBar menuBar;
 
-	private String playerName1;
-	private String playerName2;
+	private String playerName1 = "Player 1";
+	private String playerName2 = "Player 2";;
 	private JTextField name1;//shows the names above the board
 	private JTextField name2;
 	private int score1;//score1 and 2 
@@ -47,7 +50,13 @@ public class TFrame extends JFrame {
 
 	public TFrame() {// constructs the window
 		super();
-		
+		setLocationRelativeTo(null);
+		aboutScreen = new JFrame();
+		aboutScreen.setSize(500, 300);
+		aboutScreen.setLocationRelativeTo(null);
+		JTextArea aboutText = new JTextArea("Rules:\n\t-Players will alternate taking turns placing an \"X\" or and \"O\"\n\t\t-The tokens can be horizontal,vertical, or diagonal\n\t-If no moves can be made, it will result in a Cat's Game\n\t-Winning a game will increase the player's score by 1\n\nInformation about the development team:\nMembers:\nBen Bowering\nWilliam Field\nAidan Kelly\nAndrew Kirvak\nEdward Park\n\nVersion 1.0.0");
+		aboutText.setEditable(false);
+		aboutScreen.add(aboutText);
 		score1 = 0;
 		score2 = 0;
 		pane = getContentPane();
@@ -61,7 +70,9 @@ public class TFrame extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					name1.setEditable(false);
-					playerName1 = name1.getText();
+					if (name1.getText() != null) {
+						playerName1 = name1.getText();
+					}
 					JOptionPane.showMessageDialog(null, "Enter Player 2 Name and press Enter");
 					name2.requestFocus();
 				}
@@ -75,7 +86,7 @@ public class TFrame extends JFrame {
 		JTextField scorelabel = new JTextField("Score:");
 		scorelabel.setHorizontalAlignment(scorelabel.CENTER);
 		scorelabel.setEditable(false);
-		JTextField scorenumbers = new JTextField(score1 + " : " + score2);
+		scorenumbers = new JTextField(score1 + " : " + score2);
 		scorenumbers.setHorizontalAlignment(scorenumbers.CENTER);
 		scorenumbers.setEditable(false);
 		JPanel scoreHolder = new JPanel();
@@ -87,7 +98,9 @@ public class TFrame extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					name2.setEditable(false);
-					playerName2 = name2.getText();
+					if (playerName2 != null) {
+						playerName2 = name2.getText();
+					}
 					JOptionPane.showMessageDialog(null,
 							"\"" + playerName1 + "\" may now click on the board to make their first move");
 				}
@@ -103,7 +116,7 @@ public class TFrame extends JFrame {
 		pane.add(scoreHolder);
 		pane.add(name2Holder);
 
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(500, 500);
 		setVisible(true);
 		currentPlayer = "x";
@@ -124,6 +137,7 @@ public class TFrame extends JFrame {
 		JMenu edit;
 		JMenu about;
 		JMenuItem undo;
+		JMenuItem info;
 
 		menuBar = new JMenuBar();
 		file = new JMenu("File");
@@ -154,7 +168,14 @@ public class TFrame extends JFrame {
 		});
 		edit.add(undo);
 		about = new JMenu("About");
-
+		info = new JMenuItem("Info");
+		info.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				aboutScreen.setVisible(true);
+			}
+		});
+		about.add(info);
 		menuBar.add(file);
 		menuBar.add(edit);
 		menuBar.add(about);
@@ -166,6 +187,8 @@ public class TFrame extends JFrame {
 		hasWinner = false;
 		score1 = 0;
 		score2 = 0;
+		scorenumbers.setText(score1 + " : " + score2);
+		
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				board[i][j].setText("");
@@ -192,11 +215,10 @@ public class TFrame extends JFrame {
 			for (int j = 0; j < 3; j++) {
 
 				if (board[i][j].getBounds().contains(p)) {
-
-					board[i][j].setText("");
-
-					togglePlayer();
-
+					if (!board[i][j].getText().equals("")) {
+						board[i][j].setText("");
+						togglePlayer();
+					}
 				}
 
 				else {
@@ -339,8 +361,10 @@ public class TFrame extends JFrame {
 		
 		if(currentPlayer.contentEquals("x")) {
 			score1++;
+			scorenumbers.setText(score1 + " : " + score2);
 		}else {
-			score2++;				
+			score2++;
+			scorenumbers.setText(score1 + " : " + score2);
 		}
 		
 		if(win) {
