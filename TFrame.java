@@ -200,8 +200,8 @@ public class TFrame extends JFrame {
 	}
 	
 	private void newGame() {// sets board spaces to empty
-		togglePlayer();
-		currentPlayer = "x";
+		//togglePlayer();
+		//currentPlayer = "x";
 		hasWinner = false;
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
@@ -216,15 +216,12 @@ public class TFrame extends JFrame {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				if (board[i][j].getBounds().contains(p)) {
-<<<<<<< HEAD
 					if (!board[i][j].getText().equals("")) {
 						board[i][j].setText("");
 						togglePlayer();
 					}
-=======
 					board[i][j].setText("");
 					togglePlayer();
->>>>>>> branch 'master' of https://github.com/willfield99/tictactoe.git
 				}
 				else {
 				}
