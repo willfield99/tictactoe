@@ -239,7 +239,7 @@ public class TFrame extends JFrame {
 								btn.setForeground(Color.BLUE);
 							}
 							hasWinner(); // check if it was a game winning move
-							winScreen(hasWinner);
+							winScreen(hasWinner);//if the game has been won the win screen will appear
 							togglePlayer();// its now the other players turn
 						}
 					}
@@ -326,7 +326,7 @@ public class TFrame extends JFrame {
 		}
 		
 	}
-	private void winScreen(boolean win) {
+	private void winScreen(boolean win) {//displays a post game screen
 		String currentPlayerName;
 		if (currentPlayer.contentEquals("x")) {
 			currentPlayerName = playerName1;
