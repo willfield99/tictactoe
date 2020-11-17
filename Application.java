@@ -1,8 +1,7 @@
-import java.io.FileNotFoundException;
-
 import javax.swing.SwingUtilities;
-/*
- * Implements TFrame
+/*11/17/20
+ * Code Killers
+ * Implements the Tic tac Toe Board
  */
 public class Application{
 	

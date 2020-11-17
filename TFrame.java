@@ -18,7 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-/*
+/*11/17/20
+ *Code Killers
+ *
  * Sets up and operates the tic tac toe board
  */
 public class TFrame extends JFrame {
@@ -198,6 +200,7 @@ public class TFrame extends JFrame {
 	}
 	
 	private void newGame() {// sets board spaces to empty
+		togglePlayer();
 		currentPlayer = "x";
 		hasWinner = false;
 		for (int i = 0; i < 3; i++) {
@@ -211,23 +214,22 @@ public class TFrame extends JFrame {
 	private void undoTurn() {// used to undo a turn on the board
 
 		for (int i = 0; i < 3; i++) {
-
 			for (int j = 0; j < 3; j++) {
-
 				if (board[i][j].getBounds().contains(p)) {
+<<<<<<< HEAD
 					if (!board[i][j].getText().equals("")) {
 						board[i][j].setText("");
 						togglePlayer();
 					}
+=======
+					board[i][j].setText("");
+					togglePlayer();
+>>>>>>> branch 'master' of https://github.com/willfield99/tictactoe.git
 				}
-
 				else {
-
 				}
 			}
-
 		}
-
 	}
 
 	private void initializeBoard() {// creates the board each turn
