@@ -287,12 +287,6 @@ public class TFrame extends JFrame {
 	}
 
 	private void hasWinner() {// checks if the game has been won or a tie has occured
-		String currentPlayerName;
-		if (currentPlayer.contentEquals("x")) {
-			currentPlayerName = playerName1;
-		} else {
-			currentPlayerName = playerName2;
-		}
 
 		if (board[0][0].getText().equals(currentPlayer) && board[1][0].getText().equals(currentPlayer)
 				&& board[2][0].getText().equals(currentPlayer)) {
@@ -333,12 +327,19 @@ public class TFrame extends JFrame {
 		
 	}
 	private void winScreen(boolean win) {
-		String winMessage = "Congrats to " + currentPlayer + " on winning the game!";
+		String currentPlayerName;
+		if (currentPlayer.contentEquals("x")) {
+			currentPlayerName = playerName1;
+		} else {
+			currentPlayerName = playerName2;
+		}
+		
+		String winMessage = "Congrats to " + currentPlayerName + " on winning the game!";
 		String[] options = {"New Game", "Reset Game", "Quit Game"};
 		
 		if(currentPlayer.contentEquals("x")) {
 			score1++;
-		}else if(currentPlayer.contentEquals("x")) {
+		}else {
 			score2++;				
 		}
 		
