@@ -332,13 +332,11 @@ public class TFrame extends JFrame {
 			hasWinner = true;
 		} else if (checkTie() == true) {
 			hasWinner = false;
-			String[] options = {"New Game", "Reset Game", "Quit Game"};
+			String[] options = {"New Game", "Quit Game"};
 			int x = JOptionPane.showOptionDialog(null, "The game has resulted in a tie", "Game Over", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 			if(x == 0) {
 				newGame();
 			}else if(x == 1) {
-				resetGame();
-			}else if(x == 2) {
 				System.exit(0);
 			}
 		}
@@ -354,7 +352,7 @@ public class TFrame extends JFrame {
 			}
 			
 			String winMessage = "Congrats to " + currentPlayerName + " on winning the game!";
-			String[] options = {"New Game", "Reset Game", "Quit Game"};//3 buttons on the winscreen popup
+			String[] options = {"New Game","Quit Game"};//2 buttons on the winscreen popup
 			
 			if(currentPlayer.contentEquals("x")) {
 				score1++;
@@ -368,8 +366,6 @@ public class TFrame extends JFrame {
 			if(x == 0) {
 				newGame();
 			}else if(x == 1) {
-				resetGame();
-			}else if(x == 2) {
 				System.exit(0);
 			}
 		}
