@@ -4,7 +4,6 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//import java.io.FileNotFoundException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -29,17 +28,15 @@ public class TFrame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	// BorderPane border;\
 	
 	private java.awt.Container pane;
 
-	private String currentPlayer;
-	private JButton[][] board;
+	private String currentPlayer;//represents whos turn it is
+	private JButton[][] board;//holds the board and its pieces
 	private JTextField scorenumbers;
 	private JFrame aboutScreen;
 	
-	private boolean hasWinner;
+	private boolean hasWinner;//true if the game has been won
 	private JMenuBar menuBar;
 
 	private String playerName1 = "Player 1";
@@ -348,25 +345,25 @@ public class TFrame extends JFrame {
 		
 	}
 	private void winScreen(boolean win) {//displays a post game screen
-		String currentPlayerName;
-		if (currentPlayer.contentEquals("x")) {
-			currentPlayerName = playerName1;
-		} else {
-			currentPlayerName = playerName2;
-		}
-		
-		String winMessage = "Congrats to " + currentPlayerName + " on winning the game!";
-		String[] options = {"New Game", "Reset Game", "Quit Game"};
-		
-		if(currentPlayer.contentEquals("x")) {
-			score1++;
-			scorenumbers.setText(score1 + " : " + score2);
-		}else {
-			score2++;
-			scorenumbers.setText(score1 + " : " + score2);
-		}
-		
-		if(win) {
+		if(win) {//winscren popup with options[]
+			String currentPlayerName;
+			if (currentPlayer.contentEquals("x")) {
+				currentPlayerName = playerName1;
+			} else {
+				currentPlayerName = playerName2;
+			}
+			
+			String winMessage = "Congrats to " + currentPlayerName + " on winning the game!";
+			String[] options = {"New Game", "Reset Game", "Quit Game"};//3 buttons on the winscreen popup
+			
+			if(currentPlayer.contentEquals("x")) {
+				score1++;
+				scorenumbers.setText(score1 + " : " + score2);
+			}else {
+				score2++;
+				scorenumbers.setText(score1 + " : " + score2);
+			}
+			
 			int x = JOptionPane.showOptionDialog(null, winMessage, "Win Screen", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 			if(x == 0) {
 				newGame();
