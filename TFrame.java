@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 /*11/17/20
  *Code Killers
  *
- * Sets up and operates the tic tac toe board
+ * Sets up and operates the tic tac toe board. This class contains all methods relating to the tic tac toe board and its components
  */
 public class TFrame extends JFrame {
 
@@ -50,7 +50,7 @@ public class TFrame extends JFrame {
 	public TFrame() {// constructs the window
 		super();
 		setLocationRelativeTo(null);
-		aboutScreen = new JFrame();
+		aboutScreen = new JFrame();//holds the about screen
 		aboutScreen.setSize(500, 300);
 		aboutScreen.setLocationRelativeTo(null);
 		JTextArea aboutText = new JTextArea("Rules:\n\t-Players will alternate taking turns placing an \"X\" or and \"O\"\n\t\t-The tokens can be horizontal,vertical, or diagonal\n\t-If no moves can be made, it will result in a Cat's Game\n\t-Winning a game will increase the player's score by 1\n\nInformation about the development team:\nMembers:\nBen Bowering\nWilliam Field\nAidan Kelly\nAndrew Kirvak\nEdward Park\n\nVersion 1.0.0");
@@ -139,15 +139,15 @@ public class TFrame extends JFrame {
 		JMenuItem info;
 
 		menuBar = new JMenuBar();
-		file = new JMenu("File");
-		newGame = new JMenuItem("Reset Game");
+		file = new JMenu("File");//file menu
+		newGame = new JMenuItem("Reset Game");//option to reset the game within the file menu
 		newGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				resetGame();
 			}
 		});
-		quit = new JMenuItem("Quit");
+		quit = new JMenuItem("Quit");//option to quit the game within the file menu
 		quit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -157,8 +157,8 @@ public class TFrame extends JFrame {
 		file.add(newGame);
 		file.add(quit);
 
-		edit = new JMenu("Edit");
-		undo = new JMenuItem("Undo");
+		edit = new JMenu("Edit");//edit menu
+		undo = new JMenuItem("Undo");//undo a turn
 		undo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -166,8 +166,8 @@ public class TFrame extends JFrame {
 			}
 		});
 		edit.add(undo);
-		about = new JMenu("About");
-		info = new JMenuItem("Info");
+		about = new JMenu("About");//about menu
+		info = new JMenuItem("Info");//see info about the game
 		info.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -281,12 +281,8 @@ public class TFrame extends JFrame {
 		}
 	}
 
-	/*
-	 * I created this method that will check if all the spaces are filled. If called
-	 * at the end of the hasWinner method, it effectively checks for a tie because
-	 * if all the spaces are filled and no one has won yet, it must be a tie.
-	 */
-	private boolean checkTie() {
+	
+	private boolean checkTie() {//checks for a tie
 		int tally = 0;
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
